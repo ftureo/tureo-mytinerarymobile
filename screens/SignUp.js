@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import { ScrollView } from "react-native-gesture-handler";
 
 const SignUp =(props) => {
-  const fondo = require('../assets/fotoGrande2.jpg')
+  const fondo = require('../assets/01-adventure.jpg')
   const logo = require('../assets/logo.png')
   const [countries, setCountries] = useState([]);
   const [newValue, setNewValue] = useState({})
@@ -46,9 +46,9 @@ const SignUp =(props) => {
   return(
     <View style={styles.cajaGrande}>
        <ImageBackground source={fondo} style={styles.image}>
-          <Image source={logo} style={styles.stretch} />
+          <Image source={logo} style={styles.containerLogo} />
       <ScrollView style={{flex:1, width:"90%", marginBottom:"2%"}}>
-        <View style={styles.prueba}>
+        <View style={styles.containerPrincipal}>
           <View style={styles.cajaRegister}>
             <Text style={styles.texto}>Sign Up</Text>
             <TextInput
@@ -141,7 +141,7 @@ const styles = {
     borderRadius:25,
     borderWidth: 1,
   },
-  prueba:{
+  containerPrincipal:{
     flex:1,
     width:'100%',
     alignItems:'center',
@@ -149,7 +149,7 @@ const styles = {
   },
   cajaRegister:{
     paddingBottom:10,
-    backgroundColor: 'rgb(250, 193, 173)',
+    backgroundColor: '#ff7f00',
     width:'100%',
     borderRadius:25,
     borderWidth: 3,
@@ -161,13 +161,13 @@ const styles = {
   cajaGrande: {
     flex: 1,
   },
-  stretch: {
+  containerLogo: {
     justifyContent:"center",
     resizeMode: "contain",
     marginTop:"3.5%",
     marginLeft:"1%",
-    width:"50%",
-    height:"30.8%", 
+    width:"67%",
+    height:"44.8%", 
   },
   image: {
     flex: 1,

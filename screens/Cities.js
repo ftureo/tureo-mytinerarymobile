@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const Cities =(props) => {
+    console.log(props)
     const backgroundCities = require('../assets/01-snow ice.jpg')
     const [cities, setCities] = useState([])
     useEffect(()=> {
@@ -12,7 +13,6 @@ const Cities =(props) => {
         .then(res => res.json())
         .then(data => setCities(data.response))
     },[])
-
 return(
 
     <View style={styles.cajaPadreCities}>
@@ -23,10 +23,10 @@ return(
             <View style={styles.cajaContenedorCities} >
                 <ScrollView >
                     {cities.map(city => (
-                <TouchableOpacity key={city._id + cityName} onPress={() => props.navigation.navigate("Itineraries",{idCity: city._id, cityPic: cityPic, cityName: cityName})}>
+                <TouchableOpacity onPress={() => props.navigation.navigate("Itineraries",{idCity: city._id, cityPic: city.cityPic, cityName: city.cityName})}>
                     <View style={styles.containerViewCitiesRender} key={city._id}>                    
-                        <Text key={city._id + cityName + cityName} style={styles.cityNameTitle}>{cityName}</Text>        
-                        <Image key={city._id + cityName} style={styles.photoCity} source={{uri:`${cityPic}`}}/>               
+                        <Text style={styles.cityNameTitle}>{cityName}</Text>        
+                        <Image style={styles.photoCity} source={{uri:`${cityPic}`}}/>               
                     </View>
                 </TouchableOpacity>
                 ))}
