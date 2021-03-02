@@ -54,37 +54,37 @@ const SignUp =(props) => {
             <TextInput
               style={[styles.input, styles.textArea]}
               placeholder="Name"
-              placeholderTextColor="rgb(103, 132, 194)"
+              placeholderTextColor="rgb(125, 125, 125)"
               onChangeText={(value) => inputLogin("givenUserName", value)} 
           />
           <TextInput
               style={[styles.input, styles.textArea]}
               placeholder='LastName'
-              placeholderTextColor="rgb(103, 132, 194)"
+              placeholderTextColor="rgb(125, 125, 125)"
             onChangeText={(value) => inputLogin("userLastName", value)}
           />
           <TextInput
               style={[styles.input, styles.textArea]}
               placeholder='UserName'
-              placeholderTextColor="rgb(103, 132, 194)"
+              placeholderTextColor="rgb(125, 125, 125)"
             onChangeText={(value) => inputLogin("username", value)}
           />
           <TextInput
             style={[styles.input, styles.textArea]}
             placeholder='Password'
-            placeholderTextColor="rgb(103, 132, 194)"
+            placeholderTextColor="rgb(125, 125, 125)"
             onChangeText={(value) => inputLogin("password", value)}
                 />
           <TextInput
               style={[styles.input, styles.textArea]}
               placeholder='Email'
-              placeholderTextColor="rgb(103, 132, 194)"
+              placeholderTextColor="rgb(125, 125, 125)"
             onChangeText={(value) => inputLogin("email", value)}
           />
           <TextInput
               style={[styles.input, styles.textArea]}
               placeholder='UserImage'
-              placeholderTextColor="rgb(103, 132, 194)"
+              placeholderTextColor="rgb(125, 125, 125)"
             onChangeText={(value) => inputLogin("userImage", value)}
           />
           <View style={[styles.input, styles.textArea]}>
@@ -100,7 +100,7 @@ const SignUp =(props) => {
               <Button
                 style={styles.pruebita}
                 title="Sign Up"
-                color="rgb(103, 132, 194)"
+                color="black"
                 onPress=
                 {()=> enviarInfo()}        
              />
@@ -119,8 +119,9 @@ const styles = {
     marginTop:"15%",
   },
   texto:{
-    color:'rgb(103, 132, 194)',
+    color:'black',
     fontSize: RFValue(24, 580),
+    fontWeight: 'bold'
   },
   boton:{
     width:"40%",
@@ -133,13 +134,13 @@ const styles = {
   },
   input:{
     height:40,
-    borderColor: 'rgb(103, 132, 194)',
     backgroundColor:"white",
     borderWidth: 2,
     marginBottom: 5,
-    marginTop:20,
-    borderRadius:25,
+    marginTop: 20,
+    borderRadius: 3,
     borderWidth: 1,
+    borderColor: 'black',
   },
   containerPrincipal:{
     flex:1,
@@ -151,7 +152,7 @@ const styles = {
     paddingBottom:10,
     backgroundColor: '#ff7f00',
     width:'100%',
-    borderRadius:25,
+    borderRadius: 5,
     borderWidth: 3,
     paddingLeft:"2%",
     paddingRight:"2%",

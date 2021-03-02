@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Cities =(props) => {
     console.log(props)
-    const backgroundCities = require('../assets/01-snow ice.jpg')
+    const backgroundCities = require('../assets/delicate.png')
     const [cities, setCities] = useState([])
     useEffect(()=> {
         fetch('https://tureo-mytinerary.herokuapp.com/api/cities')
@@ -26,13 +26,14 @@ return(
                 <TouchableOpacity onPress={() => props.navigation.navigate("Itineraries",{idCity: city._id, cityPic: city.cityPic, cityName: city.cityName})}>
                     <View style={styles.containerViewCitiesRender} key={city._id}>                    
                         <Text style={styles.cityNameTitle}>{city.cityName}</Text>        
-                        <Image style={styles.photoCity} source={{uri:`${city.cityPic}`}}/>               
+                        <Image style={styles.photoCity} source={{uri:`${city.cityPic}`}}/>
+                        <Image style={styles.separator} source={{uri: 'http://1.bp.blogspot.com/-Cx_XHHblTrM/Vj_lw1YaPKI/AAAAAAAAAAg/iU99TVFCjJQ/s1600/separador.png'}}/>             
                     </View>
                 </TouchableOpacity>
                 ))}
                 </ScrollView> 
                 <View style={{width:"100%",alignItems:"center"}}>
-                        <View style={styles.botoncito}>
+                        <View style={styles.buttonContainer}>
                             <Text style={styles.buttonHome}  onPress={()=> props.navigation.navigate('Home')}>Back to Home</Text>
                         </View>  
                     </View>   
@@ -43,9 +44,14 @@ return(
 }
 const styles = StyleSheet.create({
     titleCities:{
-        fontSize:30,
+        fontSize: 50,
         fontWeight:"bold",
-        color:"rgb(253, 142, 122)",
+        color:"#ff7f00",
+        paddingBottom: '5%',
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: {width: 2, height: -2},
+        textShadowRadius: 5
+
     },
     cajaContenedorCities:{
         alignItems:"center",
@@ -65,36 +71,41 @@ const styles = StyleSheet.create({
     cityNameTitle:{    
         marginTop:"5%",
         marginBottom:"1%",
-        color:'rgb(103, 132, 194)',
-        fontWeight:"600",
-        fontSize: RFValue(20, 580),
+        color:'black',
+        fontWeight:"800",
+        fontSize: RFValue(25, 580),
+        fontStyle: 'italic'
     },
     photoCity: {
         width: 350,
         height: 250,
-        borderRadius:45,
+        borderRadius:5,
         borderWidth: 1,
       },
+    separator: {
+        width: '100%',
+        height: 25
+    },
     cajaPadreCities:{
         flex: 1,
         alignItems:'center',   
     },
     buttonHome:{
-        color: 'rgb(103, 132, 194)',
+        color: 'white',
         fontWeight:"bold",
         fontSize:20
     },
-    botoncito:{
-        backgroundColor:'white',
+    buttonContainer:{
+        backgroundColor:'#ff7f00',
         alignItems:'center',
         justifyContent:'center',
         height:50,
         marginTop:"4%",
-        marginBottom:"4%",
-        width:'50%',
-        borderRadius:15,
-        borderWidth: 3,
-        borderColor:'rgb(253, 142, 122)'
+        marginBottom: '10%',
+        width: 150,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor:'black'
       },
 })
 

@@ -26,7 +26,7 @@ import authActions from '../redux/actions/authActions'
                   {props.loggedUser ? <Text style={styles.textButton}  onPress={()=> props.navigation.navigate('Cities')}>Discover Cities</Text>: <Text style={styles.textButton}  onPress={()=> props.navigation.navigate('SignIn')}>Discover Cities</Text>}
             </View>
             {props.loggedUser && <View style={styles.buttonAccess}>
-                   <Text style={styles.textButton}  onPress={()=> signOut()}>Sign Out</Text> 
+                   <Text style={styles.textAccess}  onPress={()=> signOut()}>Sign Out</Text> 
             </View>}
             </View>
         </View>
@@ -55,13 +55,19 @@ const styles = StyleSheet.create({
     height:"35%",
   },
   texto: {
-    fontSize: 22,
+    width: '80%',
+    fontSize: 35,
     fontWeight:"bold",
     color: "#ff7f00",
-    textAlign: 'center'
+    textAlign: 'center',
+    borderColor:'rgba(255, 255, 255, 0.8)',
+	backgroundColor: 'rgba(125, 125, 125, 0.4)',
+	textShadowColor: 'rgba(0, 0, 0, 0.75)',
+	textShadowOffset: {width: 2, height: -2},
+	textShadowRadius: 5
   },
   textButton:{
-    color: 'rgb(103, 132, 194)',
+    color: 'white',
     fontWeight:"bold",
     fontSize:20
 },
@@ -72,23 +78,28 @@ const styles = StyleSheet.create({
     height:50,
     marginTop:"-32%",
     marginBottom:50,
-    width:'40%',
-    borderRadius:15,
-    borderWidth: 3,
-    borderColor:'rgb(253, 142, 122)'
+    width:'45%',
+    borderRadius:3,
+    borderWidth: 1,
+    borderColor:'rgba(255, 255, 255, 0.8)',
   },
   buttonAccess:{
-    backgroundColor:'#ff7f00',
+    backgroundColor:'#b22222',
     alignItems:'center',
     justifyContent:'center',
     height:50,
     marginTop:"-32%",
     marginBottom:50,
     marginLeft:"4%",
-    width:'40%',
-    borderRadius:15,
-    borderWidth: 3,
-    borderColor:'rgb(253, 142, 122)'
+    width:'45%',
+    borderRadius:3,
+    borderWidth: 1,
+    borderColor:'rgba(255, 255, 255, 0.8)',
+  },
+  textAccess: {
+	color: 'black',
+	fontWeight:"bold",
+	fontSize:20
   }
 });
 

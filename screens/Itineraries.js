@@ -4,7 +4,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import axios from 'axios'
 import {connect} from 'react-redux'
 
-const fondo = require('../assets/fotoGrande2.jpg')
+const fondo = require('../assets/delicate.png')
 
 const noItineraries = require('../assets/noitineraries.jpg')
 const boy = require('../assets/hombrecito.png')
@@ -15,14 +15,13 @@ const [itineraries, setItineraries] = useState([])
 const cityId = props.route.params.idCity
 console.log(itineraries)
 useEffect(()=> {
-    // fetch('https://tureomytinerary.herokuapp.com/api/cities'+cityId)
     fetch('https://tureo-mytinerary.herokuapp.com/api/itineraries/'+cityId)
     .then(res => res.json())
     .then(data => setItineraries(data.response)) 
 },[])
     return(
         <View style={styles.containerCitiesViewsPrincipal}>
-            <ImageBackground style={styles.fondoCiudades} source={fondo}>
+            <ImageBackground style={styles.backgroundItineraries} source={fondo}>
                 <ScrollView style={styles.dont}>           
                     <ImageBackground source={{uri: `${props.route.params.cityPic}`}} style={styles.cityImage}>      
                     </ImageBackground>
@@ -30,40 +29,38 @@ useEffect(()=> {
                         <Text style={styles.tituloCiudad}>{props.route.params.cityName}</Text>
                     </View>
                     {(itineraries.length === 0) ? <ImageBackground source={noItineraries} style={styles.imagenOops}><Text style={{backgroundColor:"rgba(231, 145, 114, 0.836))",width:"100%", textAlign:"center", paddingBottom:"2%", paddingTop:"2%",color:"white"}}>Oops! We don't have itineraries yet. Come Back Soon!</Text></ImageBackground> 
-                    : itineraries.map(itinerary => (      
-                                <View  style={styles.containerRender}>           
-                                
-                                    <View style={styles.containerTitleBox}>
-                                        <Text style={styles.textoTitulo}>{itineraries.tittle}</Text>
-                                    </View>
+                    : itineraries.map(itinerary => (
+                                <View  style={styles.containerRender}>
+                                <View style={styles.containerTitleBox}>
+                                    <Text style={styles.textoTitulo}>{itinerary.titleItinerary}</Text>
+                                </View>
                                         {itinerary.activities.map(activity => (
                                             <View style={styles.containerActivities}>
                                                 <View style={styles.activityInfo}>
                                                     <Text style={styles.activityTitle}>{activity.activityTitle}</Text>
-                                                        
                                                 </View>
-                                                <View style={styles.contenedorFotos}>
-                                                    <Image style={styles.fotoActividad} source={{uri: `${activity.activityPic}`}}/>
+                                                <View>
+                                                    <Image style={styles.photoActivity} source={{uri: `${activity.activityPic}`}} />
                                                 </View>
                                             </View>
                                         ))}
-                                        <View style={styles.containerTitleBox}>
-                                            <Text style={styles.textoInformation}>ABOUT ITINERARY</Text>
-                                        </View>
-                                        <View style={styles.activityInfo}>
-                                            <Text style={styles.userName}>{itinerary.userName}</Text>
-                                            {itinerary.userName === "travelerBoy" ? <Image style={styles.fotoUser} source={boy}/>: itinerary.userName === "travelerGirl"?<Image style={styles.fotoUser} source={girl}/>: <Image style={styles.fotoUser} source={{uri: `${itinerary.userImg}`}}/>}
-                                        </View>
                                         <View style={styles.cajaInfoUser}>
-                                            <Text style={styles.info}>Duration: {itinerary.Duration}</Text>
+                                            <Text style={styles.info}>{`Duration: ${itinerary.duration} hours`}</Text>
                                             <Text style={styles.info}>Price: {Array(itinerary.price).fill('$')}</Text>
                                         </View>
-                                        
+                                        <View>
+                                            <Text style={styles.textoInformation}>Itinerary created by</Text>
+                                        </View>
+                                        <View style={styles.activityInfo}>
+                                            <Text style={styles.userName}>{itinerary.userNameCreator}</Text>
+                                            {itinerary.userName === "travelerBoy" ? <Image style={styles.fotoUser} source={boy}/>: itinerary.userName === "travelerGirl"?<Image style={styles.fotoUser} source={girl}/>: <Image style={styles.fotoUser} source={{uri: `${itinerary.userPicCreator}`}}/>}
+                                        </View>
+                                        <Image style={styles.separator} source={{uri: 'http://1.bp.blogspot.com/-Cx_XHHblTrM/Vj_lw1YaPKI/AAAAAAAAAAg/iU99TVFCjJQ/s1600/separador.png'}}/> 
                                 </View>
                     ))}
                     <View style={{width:"100%",alignItems:"center"}}>
-                        <View style={styles.botoncito}>
-                            <Text style={styles.xd}  onPress={()=> props.navigation.navigate('Home')}>Back to Home</Text>
+                        <View style={styles.buttonContainer}>
+                            <Text style={styles.buttonHome}  onPress={()=> props.navigation.navigate('Home')}>Back to Home</Text>
                         </View>  
                     </View>      
                 </ScrollView>  
@@ -93,77 +90,71 @@ const styles ={
 
     activityTitle:{
         marginBottom:"3%",
-        textTransform:'uppercase',
         fontWeight:'bold',
         color:'rgb(66, 90, 143)',
-        textAlign:"center"
+        textAlign:"center",
+        fontStyle: 'italic'
     },
     cajaInfoUser:{
-        flexDirection:'row',
-        justifyContent:'center'
+        flexDirection:'column',
+        justifyContent:'center',
+        marginBottom: '7%'
     },
    containerRender:{
-       marginBottom:"10%",
-       paddingTop:20,
        width:'100%',
        alignItems:'center',
-       paddingBottom:'12%'
+       paddingBottom:'7%'
    },
     cajaHashtags:{
         flexDirection:'row',
         paddingTop:10
     },
     info:{
-        fontSize: RFValue(18, 580),
-        marginLeft:20,
+        fontSize: RFValue(15, 580),
+        textAlign: 'center',
         marginTop:20,
-        fontWeight:'bold',
-        textTransform:'uppercase',
         paddingLeft:10,
-        paddingRight: 10 ,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
         borderColor:'rgb(66, 90, 143)',
-        borderRadius:25,
-        borderWidth: 2,
-        color:'white',
-        backgroundColor:'rgb(115, 143, 202)',
+        borderRadius:3,
+        color:'black',
+        backgroundColor: 'rgba(125, 125, 125, 0.4)',
     },
     userName:{
         fontSize: RFValue(18, 580),
-        backgroundColor:'violet',
         textTransform:'uppercase',
-        fontWeight:'bold',
-        marginTop:20,
+        marginTop: 3,
         color:'white',
-        backgroundColor:'rgb(115, 143, 202)',
-        borderRadius:25,
-        borderWidth: 1,
-        paddingLeft:10,
-        paddingRight: 10 ,
-        borderColor:'rgb(66, 90, 143)',
-        borderRadius:25,
-        borderWidth: 2,  
+        backgroundColor:'#ff9800',
+        borderRadius: 5,
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 5,
+        paddingBottom: 5
     },
     textoInformation:{
         fontSize: RFValue(17, 580),
-        color:'white',
-        fontWeight: 'bold'
+        color:'black'
     },
     textoTitulo:{
         fontSize: RFValue(18, 580),
         fontWeight: 'bold',
         textTransform:'capitalize',
         alignItems:'center',
-        color:'white', 
+        color:'black'
     },
     containerTitleBox:{
         alignItems:'center',
-        borderColor:'rgb(231, 145, 114)',  
-        borderWidth: 2,
         width:'100%',
-        backgroundColor:'rgb(250, 193, 173)',
+        backgroundColor: 'rgba(125, 125, 125, 0.2)',
+        paddingBottom: 8,
+        paddingTop: 8
     },
     activityInfo:{
-        alignItems:'center'
+        alignItems:'center',
+        marginBottom: 10
     },
     fotoUser:{  
         width:200,
@@ -179,27 +170,28 @@ const styles ={
     }, 
     containerActivities:{
         width:'80%',
-        marginTop:20,
-        marginBottom:20
     },
-    fotoActividad:{  
-        height:180,
-        marginBottom:10,
-        borderRadius:25,
-        borderWidth: 1,
+    photoActivity:{  
+        height: 180,
+        marginBottom: 10,
+        borderRadius: 5
     },
     nameCity:{
-        borderRadius:6,
-        backgroundColor:'rgb(103, 132, 194)',
         alignItems:'center',
+        paddingBottom: 8,
+        paddingTop: 8,
         marginBottom:"2%",
     },
     tituloCiudad:{
-        color:'white',
+        color:'#ff7f00',
         borderRadius:20,
         textTransform:'capitalize',
-        fontSize: RFValue(25, 580),
+        fontSize: RFValue(35, 580),
         fontWeight: 'bold',
+        fontStyle: 'italic',
+        textShadowColor: 'rgba(0, 0, 0, 0.6)',
+        textShadowOffset: {width: 2, height: -2},
+        textShadowRadius: 10
     },
     cityImage:{
         width:'100%',
@@ -209,29 +201,31 @@ const styles ={
     containerCitiesViewsPrincipal:{
         flex: 1,  
     },
-    fondoCiudades: {
+    backgroundItineraries: {
         flex: 1,
-        backgroundColor:'yellow',
         resizeMode: 'cover',
       },
-    xd:{
-        color: 'rgb(103, 132, 194)',
-        fontWeight:"bold",
-        fontSize:20
-    },
-    botoncito:{
-        backgroundColor:'white',
-        alignItems:'center',
-        justifyContent:'center',
-        height:50,
-        marginTop:"-6%",
-        marginBottom:50,
-        width:'50%',
-        borderRadius:15,
-        borderWidth: 3,
-        borderColor:'rgb(253, 142, 122)'
+      buttonHome:{
+          color: 'white',
+          fontWeight:"bold",
+          fontSize:20
       },
-      
+      buttonContainer:{
+          backgroundColor:'#ff7f00',
+          alignItems:'center',
+          justifyContent:'center',
+          height:50,
+          marginTop:"4%",
+          marginBottom: '10%',
+          width: 150,
+          borderRadius: 5,
+          borderWidth: 1,
+          borderColor:'black'
+        },  
+    separator: {
+        width: '100%',
+        height: 25
+    },
 }
 
 const mapStateToProps =state=>{

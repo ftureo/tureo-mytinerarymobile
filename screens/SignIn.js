@@ -56,9 +56,9 @@ const SignIn =(props) => {
               />
                 <View style={styles.boton}>
                   <Button
-                    style={styles.pruebita}
                     title="Sign In"
-                    color="rgb(103, 132, 194)"
+                    color="#000"
+                    fontWeight='bold'
                     onPress=
                       {enviarInfo}          
                   />
@@ -87,13 +87,15 @@ const styles = {
     marginTop:"15%",
   },
   texto:{
-    color:'rgb(103, 132, 194)',
+    color:'black',
     fontSize: RFValue(24, 580), 
   },
   boton:{
     width:"40%",
-    paddingTop:10,
-    borderRadius:40
+    paddingTop: 10,
+    borderRadius: 5,
+    fontWeight: 'bold'
+
   },
   textArea:{
     height: 40,
@@ -107,7 +109,7 @@ const styles = {
     borderWidth: 2,
     marginBottom: 5,
     marginTop:20,
-    borderRadius:25,
+    borderRadius:10,
     borderWidth: 1, 
   },
   containerPrincipal:{
@@ -120,7 +122,7 @@ const styles = {
     backgroundColor: '#ff7f00',
     paddingBottom:10,
     width:'100%',
-    borderRadius:25,
+    borderRadius:15,
     borderWidth: 3,
     borderColor: 'rgb(231, 145, 114)',
     alignItems:'center',
