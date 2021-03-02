@@ -29,7 +29,7 @@ const SignUp =(props) => {
     setErrores([])
     const respuesta = await props.newUser(newValue)
     if(respuesta && !respuesta.success){
-      respuesta.errors.map(error => Alert.alert("All the fields must be filled"))
+      console.log(respuesta)
     } else {
       Alert.alert('Welcome to Mytinerary') 
       props.navigation.navigate("Home") 
@@ -55,19 +55,19 @@ const SignUp =(props) => {
               style={[styles.input, styles.textArea]}
               placeholder="Name"
               placeholderTextColor="rgb(103, 132, 194)"
-              onChangeText={(value) => inputLogin("name", value)} 
+              onChangeText={(value) => inputLogin("givenUserName", value)} 
           />
           <TextInput
               style={[styles.input, styles.textArea]}
               placeholder='LastName'
               placeholderTextColor="rgb(103, 132, 194)"
-            onChangeText={(value) => inputLogin("lastname", value)}
+            onChangeText={(value) => inputLogin("userLastName", value)}
           />
           <TextInput
               style={[styles.input, styles.textArea]}
               placeholder='UserName'
               placeholderTextColor="rgb(103, 132, 194)"
-            onChangeText={(value) => inputLogin("userName", value)}
+            onChangeText={(value) => inputLogin("username", value)}
           />
           <TextInput
             style={[styles.input, styles.textArea]}

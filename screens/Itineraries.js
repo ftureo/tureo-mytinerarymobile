@@ -1,6 +1,8 @@
 import { ScrollView, Text, View, Image, ImageBackground } from 'react-native';
 import React, {useRef, useState, useEffect} from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import axios from 'axios'
+import {connect} from 'react-redux'
 
 const fondo = require('../assets/fotoGrande2.jpg')
 
@@ -11,12 +13,12 @@ const girl= require('../assets/icono2.png')
 const Itineraries =(props) => {
 const [itineraries, setItineraries] = useState([])
 const cityId = props.route.params.idCity
-
+console.log(itineraries)
 useEffect(()=> {
     // fetch('https://tureomytinerary.herokuapp.com/api/cities'+cityId)
-    fetch('https://tureomytinerary.herokuapp.com/api/itineraries'+cityId)
+    fetch('https://tureo-mytinerary.herokuapp.com/api/itineraries/'+cityId)
     .then(res => res.json())
-    .then(data => setItineraries(data.response))
+    .then(data => setItineraries(data.response)) 
 },[])
     return(
         <View style={styles.containerCitiesViewsPrincipal}>
@@ -27,11 +29,12 @@ useEffect(()=> {
                     <View style={styles.nameCity}>
                         <Text style={styles.tituloCiudad}>{props.route.params.cityName}</Text>
                     </View>
-                    {(itineraries.length === 0) ? <ImageBackground source={noItineraries} style={styles.imagenOops}><Text style={{backgroundColor:"rgba(231, 145, 114, 0.836))",width:"100%", textAlign:"center", paddingBottom:"2%", paddingTop:"2%",color:"white"}}>Oops! We don't have itineraries yet. Come Back Soon!</Text></ImageBackground> : itineraries.map(itinerary => (      
+                    {(itineraries.length === 0) ? <ImageBackground source={noItineraries} style={styles.imagenOops}><Text style={{backgroundColor:"rgba(231, 145, 114, 0.836))",width:"100%", textAlign:"center", paddingBottom:"2%", paddingTop:"2%",color:"white"}}>Oops! We don't have itineraries yet. Come Back Soon!</Text></ImageBackground> 
+                    : itineraries.map(itinerary => (      
                                 <View  style={styles.containerRender}>           
                                 
                                     <View style={styles.containerTitleBox}>
-                                        <Text style={styles.textoTitulo}>{itinerary.tittle}</Text>
+                                        <Text style={styles.textoTitulo}>{itineraries.tittle}</Text>
                                     </View>
                                         {itinerary.activities.map(activity => (
                                             <View style={styles.containerActivities}>
@@ -230,4 +233,11 @@ const styles ={
       },
       
 }
-export default Itineraries
+
+const mapStateToProps =state=>{
+    return {
+        loggedUser: state.auth.loggedUser
+    }
+}
+
+export default connect(mapStateToProps)(Itineraries)

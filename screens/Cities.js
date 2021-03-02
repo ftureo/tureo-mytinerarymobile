@@ -9,7 +9,7 @@ const Cities =(props) => {
     const backgroundCities = require('../assets/01-snow ice.jpg')
     const [cities, setCities] = useState([])
     useEffect(()=> {
-        fetch('https://tureomytinerary.herokuapp.com/api/cities')
+        fetch('https://tureo-mytinerary.herokuapp.com/api/cities')
         .then(res => res.json())
         .then(data => setCities(data.response))
     },[])
@@ -25,8 +25,8 @@ return(
                     {cities.map(city => (
                 <TouchableOpacity onPress={() => props.navigation.navigate("Itineraries",{idCity: city._id, cityPic: city.cityPic, cityName: city.cityName})}>
                     <View style={styles.containerViewCitiesRender} key={city._id}>                    
-                        <Text style={styles.cityNameTitle}>{cityName}</Text>        
-                        <Image style={styles.photoCity} source={{uri:`${cityPic}`}}/>               
+                        <Text style={styles.cityNameTitle}>{city.cityName}</Text>        
+                        <Image style={styles.photoCity} source={{uri:`${city.cityPic}`}}/>               
                     </View>
                 </TouchableOpacity>
                 ))}

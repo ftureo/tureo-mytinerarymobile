@@ -3,7 +3,7 @@ import {Alert} from 'react-native'
 const authActions = {
     newUser: (newUser) => {
         return async (dispatch, getState) => {
-            const response = await axios.post('https://alcalde-mytinerary.herokuapp.com/api/signup', newUser)
+            const response = await axios.post('https://tureo-mytinerary.herokuapp.com/api/user/signup', newUser)
             if(!response.data.success){
               return response.data
             }
@@ -17,7 +17,7 @@ const authActions = {
       },
     signIn: (user) => { // Borra loggeduser del state y se deslogea 
         return async (dispatch, getState) => {
-            const response = await axios.post('https://alcalde-mytinerary.herokuapp.com/api/signin', user)
+            const response = await axios.post('https://tureo-mytinerary.herokuapp.com/api/user/signin', user)
         if(!response.data.success){
           return response.data
         }
@@ -27,7 +27,7 @@ const authActions = {
     logFromAsyncStorage: (token) => {
         return async (dispatch, getState)=>{
             try{
-                const respuesta = await axios.post('https://mytinerarybackend.herokuapp.com/api/user/localstorage', {token}, {
+                const respuesta = await axios.post('https://tureo-mytinerary.herokuapp.com/api/user/localstorage', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
